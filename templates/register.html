@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- banner bg main start -->
+<div class="banner_bg_main">
+  <!-- header top section start -->
+  <div class="container">
+    <div class="header_section_top">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="custom_menu">
+            <ul>
+              <li><a href="/">Home Page</a></li>
+              <li><a href="login_view">Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header top section start -->
+  <!-- logo section start -->
+  <div class="logo_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="logo">
+            <a href="index.html"><img src="images/logo.png" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="my-form">
+    <form action="register" method="post">
+      {% csrf_token %}
+      <div class="div-center"><h1>Registration</h1></div>
+      <input type="text" name="username" placeholder="Username" />
+      <input type="text" name="first_name" placeholder="First Name" />
+      <input type="text" name="last_name" placeholder="Last Name" />
+      <input type="email" name="email" placeholder="Email" />
+      <input type="tel" name="mobile_number" placeholder="Mobile Number" />
+      <input type="password" name="password" placeholder="Password" />
+      <input
+        type="password"
+        name="confirm_password"
+        placeholder="Confirm Password"
+      />
+      <button type="submit">Register</button>
+
+      {% if messages %}
+      <div class="message">
+        {% for message in messages %} {{ message }}
+        <br />
+        {% endfor %}
+      </div>
+      {% endif %}
+    </form>
+  </section>
+
+  <!-- banner section end -->
+</div>
+<!-- banner bg main end -->
+{% endblock %}

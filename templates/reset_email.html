@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Password Reset</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      p {
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: #337ab7;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .button:hover {
+        background-color: #23527c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Password Reset</h1>
+      <p>Hello {{ user.username }},</p>
+      <p>
+        We received a request to reset your password. Click the button below to
+        proceed with the password reset:
+      </p>
+      <p>
+        <a
+          class="button"
+          href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}"
+          >Reset Password</a
+        >
+      </p>
+      <p>If you didn't request a password reset, please ignore this email.</p>
+      <p>Thank you.</p>
+    </div>
+  </body>
+</html>

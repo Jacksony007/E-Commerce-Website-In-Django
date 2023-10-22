@@ -1,0 +1,365 @@
+{% extends 'base.html' %} {% block content %}{% load static %}
+<!-- banner bg main start -->
+<section>
+  <div class="banner_bg_main">
+    <!-- header top section start -->
+    <div class="container">
+      <div class="header_section_top">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="custom_menu">
+              <ul>
+                <li><a href="#">Best Sellers</a></li>
+                <li><a href="#">Gift Ideas</a></li>
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Today's Deals</a></li>
+                <li><a href="#">Customer Service</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      {% if user_name %}
+      <p class="welcome-message">Welcome, {{ user_name }}!</p>
+      {% else %}
+      <p class="welcome-message">Welcome, Guest!</p>
+      {% endif %}
+    </div>
+
+    <!-- header top section start -->
+    <!-- logo section start -->
+    <div class="logo_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="logo">
+              <a href="index.html"><img src="images/logo.png" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- logo section end -->
+    <!-- header section start -->
+    <div class="header_section">
+      <div class="container">
+        <div class="containt_main">
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              >&times;</a
+            >
+            <a href="/">Home</a>
+            {% if user.is_authenticated %}
+            <a href="accounts/logout_view">Logout</a>
+            <a href="#">My Account</a>
+            <a href="index.html">My Orders</a>
+            {% else %}
+            <a href="accounts/login_view">Login</a>
+            <a href="accounts/register">Register</a>
+            {% endif %}
+
+            <a href="{% url 'fashion' %}">Fashion</a>
+            <a href="{% url 'electronic' %}">Electronic</a>
+            <a href="{% url 'jewellery' %}">Jewellery</a>
+            <a href="{% url 'help_desk' %}">Help Desk</a>
+            <a href="{% url 'about_us' %}">About Us</a>
+          </div>
+          <span class="toggle_icon" onclick="openNav()"
+            ><img src="{% static 'images/toggle-icon.png' %}"
+          /></span>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              All Category
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          <div class="main">
+            <!-- Another variation with a button -->
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search this blog"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  style="background-color: #f26522; border-color: #f26522"
+                >
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header_box">
+            <div class="lang_box">
+              <a
+                href="#"
+                title="Language"
+                class="nav-link"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <img
+                  src="{% static 'images/flag-uk.png' %}"
+                  alt="flag"
+                  class="mr-2"
+                  title="United Kingdom"
+                />
+                English
+                <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">
+                  <img
+                    src="{% static 'images/flag-france.png' %}"
+                    class="mr-2"
+                    alt="flag"
+                  />
+                  French
+                </a>
+              </div>
+            </div>
+            <div class="login_menu">
+              <ul>
+                <li>
+                  <a href="{% url 'cart_view' %}">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span class="padding_10">Cart</span>
+                    <span id="cart_count_placeholder"></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header section end -->
+    <!-- banner section start -->
+    <div class="banner_section layout_padding">
+      <div class="container">
+        <div id="my_slider" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1 class="banner_taital">
+                    Get Start <br />Your favourite shoping
+                  </h1>
+                  <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1 class="banner_taital">
+                    Get Start <br />Your favourite shoping
+                  </h1>
+                  <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1 class="banner_taital">
+                    Get Start <br />Your favourite shoping
+                  </h1>
+                  <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#my_slider"
+            role="button"
+            data-slide="prev"
+          >
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#my_slider"
+            role="button"
+            data-slide="next"
+          >
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- banner section end -->
+  </div>
+  <!-- banner bg main end -->
+  <!-- fashion section start -->
+  <div class="fashion_section">
+    <div id="main_slider" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        {% if products %} {% for product in products %}
+        <!-- banner bg main end -->
+        {% if forloop.counter0|divisibleby:10 %}
+        <div class="carousel-item active">
+          <div class="container">
+            <div class="fashion_section_2">
+              <h1 class="fashion_taital text-center">Fashion</h1>
+              <div class="row">
+                {% endif %}
+                <div class="col-lg-4 col-sm-4">
+                  <div class="box_main">
+                    <h4 class="shirt_text">{{ product.name }}</h4>
+                    <p class="price_text">
+                      Price
+                      <span style="color: #262626">$ {{ product.price }}</span>
+                    </p>
+                    <div class="tshirt_img">
+                      <a href="{% url 'product_details' product.id %}">
+                        <img src="{{ product.images.url }}" />
+                      </a>
+                    </div>
+
+                    <div class="btn_main">
+                      <div class="buy_bt"><a href="#">Buy Now</a></div>
+                      <div class="seemore_bt">
+                        <button
+                          class="add_to_cart_btn"
+                          data-product-id="{{ product.id }}"
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-description">
+                      <p>{{ product.description }}</p>
+                    </div>
+                    <div class="product-info">
+                      {% if product.sizes %}
+                      <span class="info-label">Size Available:</span>
+                      <span class="info-values">{{ product.sizes }}</span>
+                      {% else %}
+                      <span class="info-label">Size Available:</span>
+                      <span class="info-values">No sizes available</span>
+                      {% endif %} {% if product.colors %}
+                      <span class="info-label">Color Options:</span>
+                      <span class="info-values">{{ product.colors }}</span>
+                      {% else %}
+                      <span class="info-label">Color Options:</span>
+                      <span class="info-values">No colors available</span>
+                      {% endif %}
+
+                      <span id="discount-span">
+                        {% if product.discount %}
+                        <a href="" class="discount-link"
+                          >{{ product.discount }}% off</a
+                        >
+                        {% else %}
+                        <span class="no-discount">No discount available</span>
+                        {% endif %}
+                      </span>
+                    </div>
+                    <style>
+                      .product-info {
+                        display: grid;
+                        grid-template-columns: max-content max-content;
+                        grid-gap: 5px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        margin-bottom: 10px;
+                      }
+
+                      .info-label {
+                        font-weight: bold;
+                        color: #333;
+                      }
+
+                      .info-values {
+                        color: #666;
+                      }
+
+                      .discount-link {
+                        color: #007bff;
+                        text-decoration: none;
+                      }
+
+                      .no-discount {
+                        color: #999;
+                        font-style: italic;
+                        .star {
+                          color: #999; /* Default color for empty stars */
+                        }
+
+                        .star.filled {
+                          color: #ffcc00; /* Color for filled stars */
+                        }
+                      }
+                    </style>
+                    <div class="rating">
+                      <h5>Rating</h5>
+                      {% if product.rating %}<!-- fashion-->
+                      {% for i in product.rating_range %}
+                      <!-- fashion-->
+                      {% if i <= product.average_rating %}
+                      <span class="star filled">&#9733;</span>
+                      {% else %}
+                      <span class="star">&#9733;</span>
+                      {% endif %} {% endfor %} {% else %}<!-- fashion-->
+                      {% for _ in product.rating_range %}
+                      <span class="star">&#9734;</span>
+                      {% endfor %} {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% if forloop.counter|divisibleby:10 or forloop.last %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %} {% endfor %} {% else %}
+        <div class="carousel-item active">
+          <div class="container">
+            <h1 class="fashion_taital">Fashion</h1>
+            <div class="fashion_section_2 text-center">
+              <p>No products available for this category.</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#main_slider"
+        role="button"
+        data-slide="prev"
+      >
+        <i class="fa fa-angle-left"></i>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#main_slider"
+        role="button"
+        data-slide="next"
+      >
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <script src="{% static 'js/script.js' %}"></script>
+</section>
+<!-- footer section start -->
+{% endblock %}

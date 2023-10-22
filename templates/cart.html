@@ -1,0 +1,210 @@
+{% extends 'base.html' %} {% block content %}{% load static %}
+
+<!-- banner bg main start -->
+<div class="banner_bg_main">
+  <!-- header top section start -->
+  <div class="container">
+    <div class="header_section_top">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="custom_menu">
+            <ul>
+              <li><a href="/">Home Page</a></li>
+              <li><a href="#">Requst OTP</a></li>
+              <li><a href="{%url 'password-reset'%}">Forget Password</a></li>
+              <li><a href="{%url 'register'%}">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header top section start -->
+  <!-- logo section start -->
+  <div class="logo_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="logo">
+            <a href="index.html"
+              ><img src="{% static 'images/logo.png' %}"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="cart">
+    <header>
+      <h1>Your Cart</h1>
+    </header>
+    <style>
+      #cart .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #cart .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 4px;
+      }
+
+      #cart .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+
+      #cart button {
+        margin-left: 10px;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #confirm-button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+      }
+
+      #confirm-button:hover {
+        background-color: #c0392b; /* New background color on hover */
+      }
+
+      #cancel-button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+      }
+
+      #cancel-button:hover {
+        background-color: #2980b9; /* New background color on hover */
+      }
+
+      #buy-button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+      }
+      .remove-button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+      }
+      .remove-button:hover {
+        background-color: #c0392b; /* New background color on hover */
+      }
+
+      #buy-button:hover {
+        background-color: #2980b9; /* New background color on hover */
+      }
+
+      #cart .modal-heading,
+      #cart .modal-text {
+        text-align: center;
+      }
+      .action-btn {
+        text-align: center;
+        padding: 10px;
+        display: grid;
+        gap: 30px;
+      }
+      .items-div {
+        padding: 10px;
+        width: auto;
+      }
+    </style>
+    <div id="confirmation-modal" class="modal">
+      <div class="modal-content">
+        <h3 class="modal-heading">Confirm Removal</h3>
+        <p class="modal-text">
+          Are you sure you want to remove this product from the cart?
+        </p>
+        <div class="modal-buttons">
+          <button id="confirm-button">Confirm</button>
+          <button id="cancel-button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cart-items">
+      <!-- Product list -->
+      <!-- cart.html -->
+      <p>
+        Total number of products:
+        <span id="cart_count"></span>
+      </p>
+      {% for item in cart_items %}
+
+      <div class="cart-item">
+        <p style="padding-right: 20px">Item #{{ item.index }}</p>
+        <img
+          src="{{ item.product.images.url }}"
+          alt="{{ item.product.name }}"
+        />
+        <div class="items-div">
+          <h2>{{ item.product.name }}</h2>
+          <input type="number" value="{{ item.quantity }}" min="1" />
+          <p>${{ item.product.price }}</p>
+          <p>${{ item.subtotal }}</p>
+          <p>Category: {{ item.product.category.name }}</p>
+          <p>Review: {{ item.product.review.rating }}</p>
+        </div>
+        <div class="action-btn">
+          <button
+            id="buy-button"
+            onclick="openConfirmationModal('{{ item.pk }}')"
+          >
+            Buy Now
+          </button>
+          <button
+            class="remove-button"
+            onclick="openConfirmationModal('{{ item.pk }}')"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+
+      {% endfor %}
+
+      <div id="cart-total">
+        <h3>Total: ${{ subtotal }}</h3>
+        <p>
+          Total number of products:
+          <span id="cart_count_placeholder"></span>
+        </p>
+        <p id="actual-price"></p>
+        <p id="discount-price"></p>
+        <p id="delivery-fee"></p>
+      </div>
+
+      <div id="cart-buttons">
+        <button id="update-button">Place Order</button>
+        <button id="continue-shopping-button">Continue Shopping</button>
+        <button id="checkout-button">Checkout</button>
+      </div>
+    </div>
+
+    <div id="empty-cart">
+      <p>Your cart is empty. <a href="index.html">Continue shopping</a>.</p>
+    </div>
+  </section>
+  <script src="{% static 'js/script.js' %}"></script>
+
+  <!-- banner section end -->
+</div>
+<!-- banner bg main end -->
+{% endblock %}

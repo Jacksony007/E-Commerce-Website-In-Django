@@ -1,0 +1,393 @@
+{% extends 'base.html' %} {% block content %}{% load static %}
+
+<!-- banner bg main start -->
+<div class="banner_bg_main">
+  <!-- header top section start -->
+  <div class="container">
+    <div class="header_section_top">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="custom_menu">
+            <ul>
+              <li><a href="/">Home Page</a></li>
+              <li><a href="#">Requst OTP</a></li>
+              <li><a href="{%url 'password-reset'%}">Forget Password</a></li>
+              <li><a href="{%url 'register'%}">Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header top section start -->
+  <!-- logo section start -->
+  <div class="logo_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="logo">
+            <a href="index.html"
+              ><img src="{% static 'images/logo.png' %}"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="product-details">
+    <!-- product_details.html -->
+
+    <style>
+      #product-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        padding: 30px;
+        background-color: aliceblue;
+      }
+
+      /* Star rating CSS */
+      .star-rating {
+        display: inline-block;
+        unicode-bidi: bidi-override;
+        color: #cccccc;
+        font-size: 20px;
+        height: 20px;
+        width: 100px;
+      }
+
+      .star-rating > span {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        transition: color 0.2s ease-in-out;
+      }
+
+      .star-rating > span:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: #ffd700;
+      }
+
+      .product-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 10px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        max-width: 500px;
+        flex-shrink: 0;
+        margin-right: 0;
+      }
+
+      .product-details {
+        flex: 1;
+        width: auto;
+      }
+
+      .product-details h1 {
+        font-size: 24px;
+        margin-top: 0;
+      }
+
+      .product-details p {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .star-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .star-rating > span {
+        color: #ffd700;
+      }
+
+      .review {
+        margin-bottom: 10px;
+      }
+
+      .review .username {
+        font-weight: bold;
+      }
+
+      .review .rating {
+        color: #ffd700;
+      }
+
+      .no-reviews {
+        font-style: italic;
+        color: #999999;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .add-to-cart {
+        background-color: #4caf50;
+        color: #ffffff;
+      }
+
+      .buy-now {
+        background-color: #f44336;
+        color: #ffffff;
+      }
+
+      .add-to-wishlist {
+        background-color: #337ab7;
+        color: #ffffff;
+      }
+
+      /* Additional styles */
+
+      .product-details .additional-details {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .product-details .additional-details-item {
+        flex-basis: 50%;
+        margin-bottom: 10px;
+      }
+
+      .product-details .additional-details-item-title {
+        font-weight: bold;
+        color: #888888;
+        margin-bottom: 5px;
+      }
+
+      .product-details .additional-details-item-value {
+        color: #333333;
+      }
+      .image-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image {
+        width: 300px;
+        transition: transform 0.3s ease;
+      }
+
+      .enlarged-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        z-index: 1;
+      }
+      .quantity-container {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+      }
+
+      .quantity-container label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .quantity-input {
+        width: 70px;
+      }
+
+      #total-price {
+        font-weight: bold;
+      }
+    </style>
+
+    <div class="product-container">
+      <div class="image-container">
+        <img
+          src="{{ product.images.url }}"
+          alt="{{ product.name }}"
+          ]
+          class="product-image"
+        />
+        <div class="enlarged-image"></div>
+      </div>
+
+      <div class="product-details">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Category: {{ product.category }}</p>
+        <div class="quantity-container">
+          <label for="quantity-input">Quantity:</label>
+          <input type="number" class="quantity-input" value="1" min="1" />
+        </div>
+        <p>Price: <span id="total-price">{{ product.price }}</span></p>
+
+        <div class="button-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now" onclick="buyProduct({{ product.id }})">
+            Buy Now
+          </button>
+          {% if product.available %}
+          <button class="add-to-wishlist">Add to Wishlist</button>
+          {% endif %}
+        </div>
+
+        <div class="star-rating">
+          {% for _ in product.rating_range %}
+          <span
+            {%
+            if
+            forloop.counter
+            <="product.avg_rating"
+            %}style="color: #FFD700;"
+            {%
+            endif
+            %}
+          ></span>
+          {% endfor %}
+        </div>
+        <p>Overall Rating: {{ product.avg_rating }}/5</p>
+        <h2>Product Details</h2>
+        <p class="availability">
+          {% if product.available %}In Stock{% else %}Out of Stock{% endif %}
+        </p>
+        <h2>Reviews</h2>
+        {% for review in product.review_set.all %}
+        <div class="review">
+          <p class="username">{{ review.user.username }}</p>
+          <p class="rating">Rating: {{ review.rating }}/5</p>
+          <p>{{ review.review_text }}</p>
+        </div>
+        {% empty %}
+        <p class="no-reviews">No reviews available.</p>
+        {% endfor %}
+      </div>
+      <div class="features">
+        <h3>Features</h3>
+        <ul>
+          <li>
+            Color: {% if product.color %}{{ product.color }}
+            <!-- product_details.html -->
+            {% else %}N/A{% endif %}
+          </li>
+          <li>
+            Size: {% if product.size %}{{ product.size }}
+            <!-- product_details.html -->
+            {% else %}N/A{% endif %}
+          </li>
+          <!-- Add more product features as needed -->
+        </ul>
+        <div class="sub-features">
+          <h4>Additional Details</h4>
+          <div class="additional-details">
+            <div class="additional-details-item">
+              <p class="additional-details-item-title">Material</p>
+              <p class="additional-details-item-value">
+                {% if product.material %}{{ product.material }}
+                <!-- product_details.html -->
+                {% else %}N/A{% endif %}
+              </p>
+            </div>
+            <div class="additional-details-item">
+              <p class="additional-details-item-title">Weight</p>
+              <p class="additional-details-item-value">
+                {% if product.weight %}{{ product.weight }}
+                <!-- product_details.html -->
+                {% else %}N/A{% endif %}
+              </p>
+            </div>
+            <!-- Add more additional details items as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add more HTML and Django template tags as needed -->
+  </section>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  <script>
+    const imageContainer = document.querySelector(".image-container");
+    const productImage = document.querySelector(".product-image");
+    const enlargedImage = document.querySelector(".enlarged-image");
+
+    imageContainer.addEventListener("mousemove", (event) => {
+      const x = event.clientX - imageContainer.getBoundingClientRect().left;
+      const y = event.clientY - imageContainer.getBoundingClientRect().top;
+
+      const xPercent = (x / imageContainer.offsetWidth) * 100;
+      const yPercent = (y / imageContainer.offsetHeight) * 100;
+
+      productImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    });
+
+    imageContainer.addEventListener("mouseenter", () => {
+      enlargedImage.style.display = "block";
+    });
+
+    imageContainer.addEventListener("mouseleave", () => {
+      enlargedImage.style.display = "none";
+    });
+
+    function updateEnlargedImage(img) {
+      enlargedImage.style.backgroundImage = `url(${img.src})`;
+    }
+
+    updateEnlargedImage(productImage);
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Get the initial product price
+      var productPrice = parseFloat("{{ product.price }}");
+
+      // Function to update the displayed price based on quantity
+      function updatePrice() {
+        var quantity = parseInt($(".quantity-input").val());
+        var totalPrice = productPrice * quantity;
+        $("#total-price").text("$" + totalPrice.toFixed(2));
+      }
+
+      // Call the updatePrice function initially
+      updatePrice();
+
+      // Call the updatePrice function whenever the quantity changes
+      $(".quantity-input").change(function () {
+        updatePrice();
+      });
+    });
+  </script>
+
+  <!-- banner section end -->
+</div>
+<!-- banner bg main end -->
+{% endblock %}
